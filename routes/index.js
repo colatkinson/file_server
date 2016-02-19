@@ -7,7 +7,6 @@ var storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: function(req, file, cb) {
-        console.log(shortid.generate());
         cb(null, shortid.generate());
     }
 });
@@ -49,9 +48,8 @@ router.get('/upload', function(req, res, next) {
 });
 
 router.post('/upload', upload.single('rando'), function(req, res, next) {
-    // console.log(req.file);
     var obj = {
-        name: req.file.originalname,
+        name: req.body.name,
         mime: req.file.mimetype,
         uploadId: req.file.filename
     };
@@ -71,8 +69,6 @@ router.get('/file/:id', function(req, res, next) {
     }, function(err, file) {
         if (err) return next(err);
 
-        console.log(mime.extension(file.mime));
-        // res.json(file);
         res.download('uploads/' + file.uploadId, file.name + '.' + mime.extension(file.mime));
     });
 
