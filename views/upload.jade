@@ -1,0 +1,7 @@
+extends layout
+
+
+block content
+    form(name="upload", action="/upload", method="post", enctype="multipart/form-data")
+        input(type="file", name="rando")
+        input(type="submit", value="upload")

@@ -1,0 +1,11 @@
+extends layout
+
+
+block content
+    ul
+        each value, index in data
+            li
+                a(href='/file/' + value.uploadId)= value.name
+                | 
+                i= value.mime
+        
