@@ -73,6 +73,7 @@ router.get('/file/:id', function(req, res, next) {
         if (err) return next(err);
 
         res.set('Content-Type', file.mime);
+        res.set('Content-Disposition', 'attachment; filename=' + file.name + '.' + mime.extension(file.mime));
         fs.readFile(path.join(__dirname, '../uploads/', file.uploadId), function(err, data) {
             if(err) return next(err);
 
