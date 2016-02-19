@@ -1,6 +1,7 @@
 {
   "name": "file_server",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"
@@ -17,5 +18,13 @@
     "multer": "^1.1.0",
     "serve-favicon": "~2.3.0",
     "shortid": "^2.2.4"
-  }
+  },
+  "description": "A really shitty file server",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [
+    "file",
+    "server"
+  ],
+  "author": "Colin Atkinson"
 }
