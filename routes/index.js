@@ -1,6 +1,7 @@
 var express = require('express');
 var multer = require('multer');
 var shortid = require('shortid');
+var path = require('path');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -17,6 +18,8 @@ var upload = multer({
 var router = express.Router();
 
 var mime = require('mime-types');
+
+var fs = require('fs');
 
 var mongoose = require('mongoose');
 require('../models/Files.js');
@@ -69,7 +72,12 @@ router.get('/file/:id', function(req, res, next) {
     }, function(err, file) {
         if (err) return next(err);
 
-        res.download('uploads/' + file.uploadId, file.name + '.' + mime.extension(file.mime));
+        res.set('Content-Type', file.mime);
+        fs.readFile(path.join(__dirname, '../uploads/', file.uploadId), function(err, data) {
+            if(err) return next(err);
+
+            res.send(data);
+        });
     });
 
 
